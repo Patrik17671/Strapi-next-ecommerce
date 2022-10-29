@@ -1,3 +1,5 @@
+import styled from "styled-components";
+
 const Product = ({product}) => {
 	//Extract data
 	const {title, price, images} = product.attributes
@@ -6,10 +8,14 @@ const Product = ({product}) => {
 			<div>
 				<img src={images.data[0].attributes.formats.small.url} alt=""/>
 			</div>
-			<h2>{title}</h2>
-			<h3>{price}</h3>
+			<h2 className="">{title}</h2>
+			<PriceStyle>{price}</PriceStyle>
 		</div>
 	);
 };
 
 export default Product;
+
+const PriceStyle = styled.h3`
+	color: red;
+`
