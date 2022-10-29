@@ -1,0 +1,21 @@
+export const PROCUT_QUERY = `
+query{
+  products{
+    data{
+      attributes{
+        title
+        description
+        price
+        slug
+        images{
+          data{
+            attributes{
+              formats
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`
