@@ -4,25 +4,25 @@ import {useRouter} from "next/router";
 
 import {AiOutlinePlus, AiOutlineMinus} from "react-icons/ai";
 
+import {useStateContext} from "../../lib/context";
+
 export default function ProductDetails() {
 	//Fetch slug
 	const {query} = useRouter();
-	
 	//Fetch data
 	const [results] = useQuery({
 		query: GET_PRODUCT_QUERY,
 		variables: {slug: query.slug}
 	});
-	
 	const {data, fetching, error} = results;
-	
 	//Waiting for data
 	if(fetching) return <p>Loading..</p>
 	//Error msgs
 	if(error) return <p>Oh no... {error.message}</p>
-	
 	//Variables
 	const {title, description, images} = data.products.data[0].attributes;
+	const {qty} = useStateContext();
+	console.log(qty)
 	
 	return (
 		<div>
