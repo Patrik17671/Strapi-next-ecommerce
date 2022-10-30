@@ -6,7 +6,9 @@ import Product from "../components/Products";
 
 export default function Home() {
 	//Fetch product data from strapi
-	const [results] = useQuery({query: PROCUT_QUERY});
+	const [results] = useQuery({
+		query: PROCUT_QUERY
+	});
 	const {data, fetching, error} = results;
 	
 	//Waiting for data
