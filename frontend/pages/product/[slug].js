@@ -21,8 +21,9 @@ export default function ProductDetails() {
 	if(error) return <p>Oh no... {error.message}</p>
 	//Variables
 	const {title, description, images} = data.products.data[0].attributes;
-	const {qty} = useStateContext();
-	console.log(qty)
+	const {qty, increaseQty, decreaseQty, onAdd} = useStateContext();
+	
+	console.log(data.products.data[0].attributes)
 	
 	return (
 		<div>
@@ -31,11 +32,15 @@ export default function ProductDetails() {
 			<p>{description}</p>
 			<div>
 				<span>Quatity</span>
-				<button><AiOutlineMinus/></button>
-				<span>0</span>
-				<button><AiOutlinePlus/></button>
+				<button onClick={decreaseQty}>
+					<AiOutlineMinus/>
+				</button>
+				<span>{qty}</span>
+				<button onClick={increaseQty}>
+					<AiOutlinePlus/>
+				</button>
 			</div>
-			<button>Add to cart</button>
+			<button onClick={() => onAdd(data.products.data[0].attributes,qty)}>Add to cart</button>
 		</div>
 	);
 };
