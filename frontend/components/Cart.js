@@ -3,7 +3,7 @@ import {useStateContext} from "../lib/context";
 
 export default function Cart() {
 	
-	const {cartItems, showCart, setShowCart,onAdd, onRemove} = useStateContext();
+	const {cartItems, showCart, setShowCart,onAdd, onRemove, totalPrice} = useStateContext();
 	
 	
 	return (
@@ -20,7 +20,7 @@ export default function Cart() {
 				{cartItems.length >= 1 &&
 					cartItems.map((item) => {
 						return (
-							<div>
+							<div key={item.slug}>
 								<img src={item.images.data[0].attributes.formats.small.url} alt={item.title}/>
 								<div>
 									<h3>{item.title}</h3>
@@ -33,6 +33,12 @@ export default function Cart() {
 						)
 					
 					})}
+				{cartItems.length > 0 && (
+					<div>
+						<h3>Dokopy: {totalPrice}€</h3>
+						<button>Pokračovať do košíka</button>
+					</div>
+				)}
 			</div>
 		</div>
 	)

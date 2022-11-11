@@ -4,7 +4,7 @@ import {useStateContext} from "../lib/context";
 
 export default function Nav(){
 	
-	const {showCart, setShowCart} = useStateContext();
+	const {showCart, setShowCart, totalQty} = useStateContext();
 	
 	return(
 		<header>
@@ -13,7 +13,8 @@ export default function Nav(){
 					<Link href={"/"}>homee</Link>
 					<div>
 						<div onClick={() => setShowCart(true)}>
-							<h3>Košík</h3>
+							<h3>Košík <sup>{totalQty > 0 && totalQty}</sup></h3>
+							
 						</div>
 					</div>
 				</nav>
