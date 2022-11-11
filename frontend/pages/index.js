@@ -29,9 +29,13 @@ export default function Home() {
 			
 			<main>
 				<h1>Ahhojkyy</h1>
-				{products.map((product, index) => (
-					<Product key={index} product={product} />
-				))}
+				<div className="container">
+					<div className="product-list">
+						{products.map((product, index) => (
+							<Product key={index} product={product} />
+						))}
+					</div>
+				</div>
 			</main>
 		</div>
 	)

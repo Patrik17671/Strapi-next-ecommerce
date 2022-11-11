@@ -6,7 +6,11 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    container: false,
   },
+  corePlugins: {
+    container: false,
+},
   plugins: [
     require( 'tailwindcss' ),
     require( 'precss' ),

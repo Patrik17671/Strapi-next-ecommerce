@@ -4,14 +4,14 @@ export default function Product({product}) {
 	//Extract data
 	const {title, price, images, slug} = product.attributes
 	return (
-		<div>
+		<div className="product-list__item">
 			<Link href={`/product/${slug}`}>
 				<div>
 					<img src={images.data[0].attributes.formats.small.url} alt=""/>
 				</div>
 			</Link>
-			<h2 className="">{title}</h2>
-			<span>{price}</span>
+			<h3 className="">{title}</h3>
+			<span>{price} €</span>
 		</div>
 	);
 };

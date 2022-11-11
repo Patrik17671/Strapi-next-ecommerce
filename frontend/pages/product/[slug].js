@@ -26,21 +26,26 @@ export default function ProductDetails() {
 	console.log(data.products.data[0].attributes)
 	
 	return (
-		<div>
-			<img src={images.data[0].attributes.formats.medium.url} alt={title}  />
-			<h3>{title}</h3>
-			<p>{description}</p>
-			<div>
-				<span>Quatity</span>
-				<button onClick={decreaseQty}>
-					<AiOutlineMinus/>
-				</button>
-				<span>{qty}</span>
-				<button onClick={increaseQty}>
-					<AiOutlinePlus/>
-				</button>
+		<div className="container">
+			<div className="product">
+				<img src={images.data[0].attributes.formats.medium.url} alt={title}  />
+				<div className="product__content">
+					<h3 className="mb-6">{title}</h3>
+					<p className="mb-4">{description}</p>
+					<div className="product__quantity">
+						<span className="mr-1">Množstvo: </span>
+						<button onClick={decreaseQty}>
+							<AiOutlineMinus/>
+						</button>
+						<span className="px-1.5 text-lg">{qty}</span>
+						<button onClick={increaseQty}>
+							<AiOutlinePlus/>
+						</button>
+					</div>
+					<button className="btn" onClick={() => onAdd(data.products.data[0].attributes,qty)}>Add to cart</button>
+				</div>
 			</div>
-			<button onClick={() => onAdd(data.products.data[0].attributes,qty)}>Add to cart</button>
+			
 		</div>
 	);
 };
