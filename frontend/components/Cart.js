@@ -1,10 +1,21 @@
 import {useStateContext} from "../lib/context";
-
+import getStripe from "../lib/getStripe";
 
 export default function Cart() {
 	
 	const {cartItems, showCart, setShowCart,onAdd, onRemove, totalPrice} = useStateContext();
 	
+	//Payment
+	const handleCheckout = async () => {
+		const stripe = await getStripe();
+		const response = await fetch('/api/stripe', {
+			method: "POST",
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify(cartItems)
+		});
+		const data = await response.json();
+		await stripe.redirectToCheckout({sessionId: data.id})
+	}
 	
 	return (
 		<div>
@@ -36,7 +47,7 @@ export default function Cart() {
 				{cartItems.length > 0 && (
 					<div>
 						<h3>Dokopy: {totalPrice}€</h3>
-						<button>Pokračovať do košíka</button>
+						<button onClick={handleCheckout}>Objednať</button>
 					</div>
 				)}
 			</div>

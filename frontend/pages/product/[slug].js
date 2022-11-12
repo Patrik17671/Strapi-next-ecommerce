@@ -16,9 +16,9 @@ export default function ProductDetails() {
 	});
 	const {data, fetching, error} = results;
 	//Waiting for data
-	if(fetching) return <p>Loading..</p>
+	if(fetching) return <p>Načitávam...</p>
 	//Error msgs
-	if(error) return <p>Oh no... {error.message}</p>
+	if(error) return <p>Niečo sa pokazilo... {error.message}</p>
 	//Variables
 	const {title, description, images} = data.products.data[0].attributes;
 	const {qty, increaseQty, decreaseQty, onAdd} = useStateContext();
