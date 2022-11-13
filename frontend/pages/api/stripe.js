@@ -11,6 +11,11 @@ export default async function handler(req,res){
 				shipping_address_collection: {
 					allowed_countries: ['SK']
 				},
+				shipping_options: [
+					{shipping_rate: "shr_1M3ff7Eq62cst4Y0fkWo2YwK"},
+					{shipping_rate: "shr_1M3fjCEq62cst4Y0A2mu9A8I"}
+				],
+				allow_promotion_codes: true,
 				line_items: req.body.map(item => {
 					return{
 						price_data: {
@@ -21,10 +26,14 @@ export default async function handler(req,res){
 							},
 							unit_amount: item.price * 100,
 						},
+						adjustable_quantity: {
+							enabled: true,
+							minimum: 1
+						},
 						quantity: item.quantity
 					}
 				}),
-				success_url: `${req.headers.origin}/success`,
+				success_url: `${req.headers.origin}/success?&session_id={CHECKOUT_SESSION_ID}`,
 				cancel_url: `${req.headers.origin}/canceled`,
 			})
 			res.status(200).json(session);
