@@ -3,7 +3,7 @@ import getStripe from "../lib/getStripe";
 
 export default function Cart() {
 	
-	const {cartItems, showCart, setShowCart,onAdd, onRemove, totalPrice} = useStateContext();
+	// const {cartItems, showCart, setShowCart,onAdd, onRemove, totalPrice} = useStateContext();
 	
 	//Payment
 	const handleCheckout = async () => {
@@ -16,10 +16,11 @@ export default function Cart() {
 		const data = await response.json();
 		await stripe.redirectToCheckout({sessionId: data.id})
 	}
+	const cartItems = 2
 	
 	return (
 		<div>
-			<div className="overlay" onClick={() => setShowCart(false)}></div>
+			{/*<div className="overlay" ></div>*/}
 			<div className="cart">
 				{cartItems.length < 1 && (
 					<div>
