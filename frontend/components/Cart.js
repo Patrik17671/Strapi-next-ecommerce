@@ -40,7 +40,8 @@ export default function Cart({handleShowCart}) {
 		const data = await response.json();
 		await stripe.redirectToCheckout({sessionId: data.id})
 	}
-
+	
+	console.log(cart.cartItems)
 	
 	return (
 		<div>

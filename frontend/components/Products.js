@@ -3,6 +3,7 @@ import Link from "next/link";
 export default function Product({product}) {
 	//Extract data
 	const {title, price, images, slug} = product.attributes
+	
 	return (
 		<div className="product-list__item">
 			<Link href={`/product/${slug}`}>

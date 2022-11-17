@@ -1,13 +1,11 @@
 import Link from "next/link";
 import Cart from "./Cart";
-// import {useStateContext} from "../lib/context";
 // import User from "./User";
 import {useUser} from "@auth0/nextjs-auth0";
 import {selectCartItems} from "../lib/slices/cartItemsSlice";
 import {useState} from "react";
 
-import { useSelector, useDispatch } from 'react-redux'
-// import {decrement, increment, cartQtyValue} from '../lib/slices/cartTotalQtySlice'
+import { useSelector } from 'react-redux'
 
 
 export default function Nav(){
