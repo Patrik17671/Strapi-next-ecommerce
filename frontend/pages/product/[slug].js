@@ -4,20 +4,37 @@ import {useRouter} from "next/router";
 
 import {AiOutlinePlus, AiOutlineMinus} from "react-icons/ai";
 
-import {useStateContext} from "../../lib/context";
-
-
 import { useSelector, useDispatch } from 'react-redux';
-import {decrement, increment, cartQtyValue} from "../../lib/slices/cartTotalQtySlice";
-import {addToCart} from "../../lib/slices/cartItemsSlice";
+import {addToCart, getTotals, selectCartItems} from "../../lib/slices/cartItemsSlice";
+import {useEffect, useState} from "react";
 
 export default function ProductDetails() {
 	
-	const qty = useSelector(cartQtyValue);
+	//Quantity state
+	const [qty, setQty] = useState(1)
+	
+	const cart = useSelector(selectCartItems);
 	const dispatch = useDispatch();
 	
+	//Update total cart qty
+	useEffect(() => {
+		dispatch(getTotals());
+	}, [cart, dispatch])
+	
+	//Add to cart
 	const handleAddToCart = (product) => {
 		dispatch(addToCart(product))
+	}
+	//Increase product quatity
+	const increaseQty = () => {
+		setQty((prevQty) => prevQty + 1);
+	}
+	// Decrease product quatity
+	const decreaseQty = () => {
+		setQty(prevQty => {
+			if(prevQty - 1 < 1) return 1;
+			return prevQty - 1;
+		});
 	}
 	
 	//Fetch slug
@@ -34,8 +51,6 @@ export default function ProductDetails() {
 	if(error) return <p>Niečo sa pokazilo... {error.message}</p>
 	//Variables
 	const {title, description, images} = data.products.data[0].attributes;
-	// const {qty, increaseQty, decreaseQty, onAdd} = useStateContext();
-	
 	
 	return (
 		<div className="container">
@@ -46,19 +61,17 @@ export default function ProductDetails() {
 					<p className="mb-4">{description}</p>
 					<div className="product__quantity">
 						<span className="mr-1">Množstvo: </span>
-						<button onClick={() => dispatch(decrement())}>
+						<button onClick={decreaseQty}>
 							<AiOutlineMinus/>
 						</button>
 						<span className="px-1.5 text-lg">{qty}</span>
-						<button  onClick={() => dispatch(increment())}>
+						<button  onClick={increaseQty}>
 							<AiOutlinePlus/>
 						</button>
 					</div>
-					{/*<button className="btn" onClick={() => onAdd(data.products.data[0].attributes, qty)}>Add to cart</button>*/}
-					<button className="btn" onClick={() => handleAddToCart(data.products.data[0].attributes)}>Add to cart</button>
+					<button className="btn" onClick={() => handleAddToCart({...data.products.data[0].attributes, cartQty: qty})}>Add to cart</button>
 				</div>
 			</div>
-			
 		</div>
 	);
 };

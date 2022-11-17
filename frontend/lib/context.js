@@ -15,7 +15,7 @@
 // 		setQty((prevQty) => prevQty + 1);
 // 	}
 //
-// 	//Increase product quatity
+// 	//Decrease product quatity
 // 	const decreaseQty = () => {
 // 		setQty(prevQty => {
 // 			if(prevQty - 1 < 1) return 1;

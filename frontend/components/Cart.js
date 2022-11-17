@@ -1,9 +1,33 @@
-import {useStateContext} from "../lib/context";
-import getStripe from "../lib/getStripe";
 
-export default function Cart() {
+import getStripe from "../lib/getStripe";
+import {useSelector, useDispatch} from "react-redux";
+import {addToCart, decreaseCart, getTotals, removeFromCart, selectCartItems} from "../lib/slices/cartItemsSlice";
+import {useEffect} from "react";
+
+export default function Cart({handleShowCart}) {
 	
-	// const {cartItems, showCart, setShowCart,onAdd, onRemove, totalPrice} = useStateContext();
+	const cart = useSelector(selectCartItems);
+	const dispatch = useDispatch()
+	
+	//Update total cart qty
+	useEffect(() => {
+		dispatch(getTotals());
+	}, [cart, dispatch])
+	
+	//Remove item from cart
+	const handleRemoveFromCart = (item) => {
+		dispatch(removeFromCart(item));
+	}
+	
+	//Decrease qty of cart item
+	const handleDecrease = (item) => {
+		dispatch(decreaseCart(item))
+	}
+	
+	//Increase qty of cart item
+	const handleIncrease = (item) => {
+		dispatch(addToCart(item))
+	}
 	
 	//Payment
 	const handleCheckout = async () => {
@@ -11,43 +35,47 @@ export default function Cart() {
 		const response = await fetch('/api/stripe', {
 			method: "POST",
 			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify(cartItems)
+			body: JSON.stringify(cart.cartItems)
 		});
 		const data = await response.json();
 		await stripe.redirectToCheckout({sessionId: data.id})
 	}
-	const cartItems = 2
+
 	
 	return (
 		<div>
-			{/*<div className="overlay" ></div>*/}
+			<div className="overlay" onClick={handleShowCart} />
 			<div className="cart">
-				{cartItems.length < 1 && (
+				{cart.cartItems.length < 1 && (
 					<div>
 						<h1>
 							Máš prázdny košík
 						</h1>
 					</div>
 				)}
-				{cartItems.length >= 1 &&
-					cartItems.map((item) => {
+				{cart.cartItems.length >= 1 &&
+				cart.cartItems.map((item) => {
 						return (
 							<div key={item.slug}>
 								<img src={item.images.data[0].attributes.formats.small.url} alt={item.title}/>
 								<div>
 									<h3>{item.title}</h3>
 									<h5>{item.price}</h5>
+									<h5>{item.cartQty}</h5>
 								</div>
-								<span onClick={() => onRemove(item)}>-</span>
+								<span onClick={() => handleDecrease(item)}>-</span>
+								<br/>
 								<span>{item.quantity}</span>
-								<span onClick={() => onAdd(item, 1)}>+</span>
+								<br/>
+								<span onClick={() => handleIncrease({...item, cartQty: 1})}>+</span>
+								<button onClick={() => handleRemoveFromCart(item)}>Vymazať</button>
 							</div>
 						)
 					
 					})}
-				{cartItems.length > 0 && (
+				{cart.cartItems.length > 0 && (
 					<div>
-						<h3>Dokopy: {totalPrice}€</h3>
+						<h3>Dokopy: {cart.cartTotalAmount} €</h3>
 						<button onClick={handleCheckout}>Objednať</button>
 					</div>
 				)}
