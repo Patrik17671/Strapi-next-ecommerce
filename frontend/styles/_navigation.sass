@@ -1,5 +1,8 @@
 header
-	@apply bg-gray-300
+	@apply bg-gray-200 z-50
+	&.scrolled
+		@apply shadow-xl sticky top-0 w-full
+		transition: all .3s
 
 	nav
 		@apply flex justify-between items-center

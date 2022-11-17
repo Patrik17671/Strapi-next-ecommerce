@@ -7,6 +7,16 @@ module.exports = {
   theme: {
     extend: {},
     container: false,
+    colors: {
+      'gray': {
+        200: '#F7F7F7'
+      },
+      'blue': {
+        500: '#3964B2'
+      },
+      'white': '#F1F1F1',
+      'black': '#222'
+    }
   },
   corePlugins: {
     container: false,
