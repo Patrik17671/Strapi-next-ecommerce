@@ -1,0 +1,44 @@
+.cart
+	@apply fixed right-0 p-6 pt-10 bg-gray-200 top-0 h-full max-w-full overflow-auto
+	padding-bottom: calc(2rem + env(safe-area-inset-bottom))
+	width: 500px
+	max-width: 100%
+	z-index: 6
+
+	.icon-plus
+		&.close
+			@apply absolute cursor-pointer
+			top: 5px
+			left: 5px
+			transform: rotate(45deg)
+			font-size: 24px
+
+	&__empty
+		height: 300px
+		@apply flex flex-col items-center justify-center
+
+		.icon-cart-plus
+			font-size: 60px
+			@apply mb-8
+
+		h1
+			font-size: 38px
+
+			i
+				@apply text-blue-500
+
+
+	&__item
+		@apply p-4 flex shadow-md rounded-md mb-6
+
+		img
+			max-height: 150px
+
+	&__content
+		@apply pl-4
+
+		.btn--remove
+			@apply block mt-4 px-2 py-1
+			font-size: 12px
+			border-color: #E50000
+			color: #E50000

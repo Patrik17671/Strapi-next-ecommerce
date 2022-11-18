@@ -6,6 +6,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import {addToCart, getTotals, selectCartItems} from "../../lib/slices/cartItemsSlice";
 import {useEffect, useState} from "react";
 
+const {motion} = require('framer-motion');
+import { Swiper, SwiperSlide } from 'swiper/react';
+
 export default function ProductDetails() {
 	
 	//Quantity state
@@ -53,22 +56,33 @@ export default function ProductDetails() {
 	return (
 		<div className="container">
 			<div className="product">
-				<img src={images.data[0].attributes.formats.medium.url} alt={title}  />
-				<div className="product__content">
+				<motion.img
+					initial={{opacity: 0, x: "50%"}}
+					animate={{opacity: 1, x: "0%"}}
+					transition={{delay: .4}}
+					src={images.data[0].attributes.formats.medium.url}
+					alt={title}
+				/>
+				<motion.div
+					initial={{opacity: 0, x: "-50%"}}
+					animate={{opacity: 1, x: "0%"}}
+					transition={{delay: .4}}
+					className="product__content"
+				>
 					<h3 className="product__title">{title}</h3>
 					<p className="mb-4">{description}</p>
 					<div className="product__quantity">
 						<span className="mr-1">Množstvo: </span>
 						<span onClick={decreaseQty}>
-							<i className="icon-minus"></i>
+							<i className="icon-minus" />
 						</span>
 						<span className="px-1.5 text-lg">{qty}</span>
 						<span  onClick={increaseQty}>
-							<i className="icon-plus"></i>
+							<i className="icon-plus" />
 						</span>
 					</div>
 					<button className="btn" onClick={() => handleAddToCart({...data.products.data[0].attributes, cartQty: qty})}>Add to cart</button>
-				</div>
+				</motion.div>
 			</div>
 		</div>
 	);

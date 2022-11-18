@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
+import toast from "react-hot-toast";
 // import {useSelector} from "react-redux";
 // import {cartQtyValue} from "./cartTotalQtySlice";
 //
@@ -21,9 +22,11 @@ export const cartItemsSlice = createSlice({
 			);
 			if(itemIndex >= 0){
 				state.cartItems[itemIndex].cartQty += action.payload.cartQty;
+				toast.success(`${state.cartItems[itemIndex].title} počet kusov bol navýšený`)
 			}else{
 				const tempProduct = {...action.payload, cartQty: action.payload.cartQty};
 				state.cartItems.push(tempProduct)
+				toast.success(`${tempProduct.title} bol pridaný do košíka`)
 			}
 			localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
 		},
@@ -31,6 +34,7 @@ export const cartItemsSlice = createSlice({
 			state.cartItems = state.cartItems.filter(
 				cartItem => cartItem.slug !== action.payload.slug
 			);
+			toast.success(`Produkt bol odobraný z košíka`)
 			localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
 		},
 		decreaseCart(state, action){

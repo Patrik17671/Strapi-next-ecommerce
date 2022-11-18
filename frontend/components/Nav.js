@@ -1,11 +1,9 @@
 import Link from "next/link";
 import Cart from "./Cart";
-// import User from "./User";
-import {useUser} from "@auth0/nextjs-auth0";
 import {selectCartItems} from "../lib/slices/cartItemsSlice";
 import {useEffect, useState} from "react";
-
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
+const {AnimatePresence, motion} = require('framer-motion');
 
 
 export default function Nav(){
@@ -35,19 +33,24 @@ export default function Nav(){
 		<header className={scrollNav ? "scrolled" : ""}>
 			<div className="container">
 				<nav>
-					<Link href={"/"}>Spilus</Link>
+					<Link className="font-bold text-2xl italic" href={"/"}>Spilus</Link>
 					<div>
 						<div onClick={handleShowCart}>
 							<i className="icon-shopping_bag">
-								<span>{qty.cartTotalQty > 0 && qty.cartTotalQty}</span>
+								{qty.cartTotalQty > 0 ? (
+									<motion.span
+										initial={{y: "-10px", opacity: 0, scale: .8}}
+										animate={{y: "0",opacity: 1, scale: 1}}
+									>{qty.cartTotalQty}
+									</motion.span>
+								) : null}
 							</i>
 						</div>
 					</div>
 				</nav>
-				{activeCart ?
-					(<Cart
-					handleShowCart={handleShowCart}
-					/>) : null}
+				<AnimatePresence>
+					{activeCart ? (<Cart handleShowCart={handleShowCart}/>) : null}
+				</AnimatePresence>
 			</div>
 		</header>
 		)

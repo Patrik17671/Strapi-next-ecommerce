@@ -22,7 +22,7 @@ export default async function handler(req,res){
 							currency: 'eur',
 							product_data: {
 								name: item.title,
-								// images: [item.images.data[0].attributes.formats.small.url]
+								images: [item.images.data[0].attributes.formats.small.url]
 							},
 							unit_amount: item.price * 100,
 						},
@@ -34,12 +34,11 @@ export default async function handler(req,res){
 					}
 				}),
 				success_url: `${req.headers.origin}/success?&session_id={CHECKOUT_SESSION_ID}`,
-				cancel_url: `${req.headers.origin}/canceled`,
+				cancel_url: `${req.headers.origin}`,
 			})
 			res.status(200).json(session);
 		}catch (error){
 			res.status(error.statusCode || 500).json(error.message);
 		}
-		
 	}
 }

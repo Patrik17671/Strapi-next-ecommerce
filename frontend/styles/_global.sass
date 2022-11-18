@@ -1,3 +1,22 @@
+@font-face
+	font-family: 'Montserrat'
+	src: url('../assets/fonts/Montserrat-Regular.ttf')
+	font-weight: 400
+
+@font-face
+	font-family: 'Montserrat'
+	src: url('../assets/fonts/Montserrat-Medium.ttf')
+	font-weight: 500
+
+@font-face
+	font-family: 'Montserrat'
+	src: url('../assets/fonts/Montserrat-Bold.ttf')
+	font-weight: 600
+
+*
+	font-family: 'Montserrat', sans-serif
+	font-weight: 400
+
 html
 	@apply bg-gray-200
 
@@ -6,8 +25,9 @@ html
 	@apply mx-auto px-4 lg:px-8
 
 .overlay
-	@apply fixed  opacity-50 inset-0
+	@apply fixed opacity-50 inset-0
 	z-index: 5
+	background: rgba($black, .5)
 	width: 100vw
 	height: 100vh
 
@@ -15,9 +35,10 @@ h3
 	@apply text-lg md:text-xl font-medium
 
 .btn
-	@apply py-2 px-6 uppercase text-blue-500 font-medium cursor-pointer
+	@apply py-2 px-6 uppercase text-blue-500 font-bold cursor-pointer
 	border: 2px solid $blue
 	transition: all .2s
+	font-size: 14px
 
 	&:hover
 		background: darken($gray1, 5%)

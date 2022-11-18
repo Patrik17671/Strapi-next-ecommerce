@@ -20,20 +20,26 @@ export default function Success({order}){
 	console.log(order)
 	
 	return(
-		<div>
-			<h1>Dikykčoo za objednávku</h1>
-			<h3>{order.customer_details.email}</h3>
-			<div>
-				<h2>{order.customer_details.city}</h2>
-				<h2>{order.customer_details.line1}</h2>
-				<h2>{order.customer_details.line2}</h2>
-				<h2>{order.customer_details.postal_code}</h2>
-				<h2>adres info</h2>
+		<div className="container">
+			<div className="success">
+				<div>
+					<h1>Ďakujeme za objednávku {order.customer_details.name} !</h1>
+					<h3>email: {order.customer_details.email}</h3>
+					<p className="font-bold mt-6">Zásielka bude odoslaná na:</p>
+					<p>{order.customer_details.name}</p>
+					<p>{order.customer_details.address.city}</p>
+					<p>{order.customer_details.address.line1}</p>
+					<p>{order.customer_details.address.line2}</p>
+					<p>{order.customer_details.address.postal_code}</p>
+					
+					<button className="btn mt-8" onClick={() => {
+						route.push("/")
+						localStorage.removeItem("cartItems");
+					}}
+					>Návrat na homepage</button>
+				</div>
+				
 			</div>
-			<div>
-				<h3>produkty</h3>
-			</div>
-			<button onClick={() => route.push("/")}>Navrat na hp</button>
 		</div>
 	)
 }

@@ -9,19 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@auth0/nextjs-auth0": "^1.9.2",
     "@reduxjs/toolkit": "^1.9.0",
     "@stripe/react-stripe-js": "^1.14.2",
     "@stripe/stripe-js": "^1.43.0",
+    "framer-motion": "^7.6.7",
     "next": "13.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-icons": "^4.6.0",
+    "react-hot-toast": "^2.4.0",
     "react-redux": "^8.0.5",
+    "react-responsive-carousel": "^3.2.23",
+    "react-slick": "^0.29.0",
     "redux": "^4.2.0",
     "sass": "^1.55.0",
+    "slick-carousel": "^1.8.1",
     "stripe": "^10.17.0",
     "styled-components": "^5.3.6",
+    "swiper": "^8.4.4",
     "urql": "^3.0.3"
   },
   "devDependencies": {
