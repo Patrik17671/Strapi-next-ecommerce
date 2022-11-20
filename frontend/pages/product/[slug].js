@@ -8,6 +8,8 @@ import {useEffect, useState} from "react";
 
 const {motion} = require('framer-motion');
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Virtual } from 'swiper';
+import 'swiper/swiper-bundle.min.css';
 
 export default function ProductDetails() {
 	
@@ -47,7 +49,15 @@ export default function ProductDetails() {
 	});
 	const {data, fetching, error} = results;
 	//Waiting for data
-	if(fetching) return <p>Načitávam...</p>
+	if(fetching) return (
+		<div className="fixed w-full h-full inset-0 flex justify-center items-center">
+			<div className="lds-facebook">
+				<div />
+				<div />
+				<div />
+			</div>
+		</div>
+	)
 	//Error msgs
 	if(error) return <p>Niečo sa pokazilo... {error.message}</p>
 	//Variables
@@ -56,13 +66,26 @@ export default function ProductDetails() {
 	return (
 		<div className="container">
 			<div className="product">
-				<motion.img
+				<motion.div
 					initial={{opacity: 0, x: "50%"}}
 					animate={{opacity: 1, x: "0%"}}
 					transition={{delay: .4}}
-					src={images.data[0].attributes.formats.medium.url}
-					alt={title}
-				/>
+					className="col-span-4 col-start-7"
+				>
+					<Swiper
+						spaceBetween={0}
+						slidesPerView={1}
+						modules={[Virtual, Navigation]}
+						virtual
+						navigation={true}
+					>
+						{images.data.map((image, index) => (
+							<SwiperSlide key={index}  virtualIndex={index}>
+								<img src={image.attributes.formats.small.url} alt=""/>
+							</SwiperSlide>
+						))}
+					</Swiper>
+				</motion.div>
 				<motion.div
 					initial={{opacity: 0, x: "-50%"}}
 					animate={{opacity: 1, x: "0%"}}

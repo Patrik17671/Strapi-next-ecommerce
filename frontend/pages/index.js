@@ -22,9 +22,17 @@ export default function Home() {
 	const {data, fetching, error} = results;
 	
 	//Waiting for data
-	if(fetching) return <p>Loading..</p>
+	if(fetching) return (
+		<div className="fixed w-full h-full inset-0 flex justify-center items-center">
+			<div className="lds-facebook">
+				<div />
+				<div />
+				<div />
+			</div>
+		</div>
+	)
 	//Error msgs
-	if(error) return <p>Oh no... {error.message}</p>
+	if(error) return <p>Oh nie... {error.message}</p>
 	
 	//Variables
 	const products = data.products.data;

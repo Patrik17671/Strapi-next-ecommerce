@@ -10,11 +10,12 @@
 
 
 .product
-	@apply pt-4 md:pt-10 md:flex flex-row-reverse overflow-hidden
+	@apply pt-4 md:pt-10 md:grid grid-cols-10 overflow-hidden
 	padding-bottom: calc(2rem + env(safe-area-inset-bottom))
 
 	img
 		object-fit: cover
+		@apply mx-auto
 
 .product__title
 	@apply relative text-2xl mb-4 pl-4
@@ -25,7 +26,7 @@
 		top: -2px
 
 .product__content
-	@apply pt-8 md:pt-40 md:pr-8
+	@apply pt-8 md:pt-40 md:pr-8 col-span-6 row-start-1
 
 .product__quantity
 	@apply flex items-center mb-4

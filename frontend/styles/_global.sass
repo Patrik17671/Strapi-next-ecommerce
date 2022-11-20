@@ -16,6 +16,7 @@
 *
 	font-family: 'Montserrat', sans-serif
 	font-weight: 400
+	--swiper-navigation-size: 20px
 
 html
 	@apply bg-gray-200
@@ -43,3 +44,46 @@ h3
 	&:hover
 		background: darken($gray1, 5%)
 		@apply shadow-md
+
+.swiper-button-next,
+.swiper-button-prev
+	height: var(--swiper-navigation-size)
+	@apply p-4
+
+	&::after
+		color: $black
+
+.lds-facebook
+	display: inline-block
+	position: relative
+	width: 80px
+	height: 80px
+
+	div
+		display: inline-block
+		position: absolute
+		left: 8px
+		width: 16px
+		background: $black
+		animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite
+
+		&:nth-child(1)
+			left: 8px
+			animation-delay: -0.24s
+
+		&:nth-child(2)
+			left: 32px
+			animation-delay: -0.12s
+
+		&:nth-child(3)
+			left: 56px
+			animation-delay: 0s
+
+@keyframes lds-facebook
+	0%
+		top: 8px
+		height: 64px
+
+	50%, 100%
+		top: 24px
+		height: 32px
