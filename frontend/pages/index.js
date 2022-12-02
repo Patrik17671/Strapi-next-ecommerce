@@ -23,12 +23,13 @@ export default function Home() {
 	
 	//Waiting for data
 	if(fetching) return (
-		<div className="fixed w-full h-full inset-0 flex justify-center items-center">
+		<div className="fixed w-full h-full inset-0 flex flex-col justify-center items-center">
 			<div className="lds-facebook">
 				<div />
 				<div />
 				<div />
 			</div>
+			<p>Prosím o strpenie prvé spustenie serveru môže trvať 30 sekúnd =).</p>
 		</div>
 	)
 	//Error msgs
